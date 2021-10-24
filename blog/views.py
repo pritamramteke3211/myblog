@@ -30,9 +30,9 @@ def blogpost(request,id=None):
     blog.save()
     comments = BlogComment.objects.filter(blog=blog)
     # only_comments = BlogComment.objects.filter(Q(reply=False) & Q(blog=blog))
-    only_comments = BlogComment.objects.filter(blog=blog).exclude(parent=None)
+    reply = BlogComment.objects.filter(blog=blog).exclude(parent=None)
 
-    context = {'blog':blog,'comments':comments,'only_comments':only_comments}
+    context = {'blog':blog,'comments':comments,'reply':reply}
     return render(request,'blog/blogpost.html',context)
 
 def blogsearch(request):

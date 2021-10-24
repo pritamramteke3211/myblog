@@ -54,7 +54,7 @@
                             <span>{{comment.timestamp|naturaltime}}</span>
                             <p>{{comment.comment}}</p>
                             {% comment %} <a href="#">Like</a> {% endcomment %}
-                            <a data-bs-toggle="collapse" href="#reply{{comment.sno}}" aria-expanded="false" aria-controls="reply{{comment.sno}}">Reply</a>
+                            <a data-bs-toggle="collapse" href="#reply{{comment.sno}}" aria-expanded="false" aria-controls="reply{{comment.sno}}">Reply{{reply|length}}</a>
                          
 
                             <div class="collapse" id="reply{{comment.sno}}">

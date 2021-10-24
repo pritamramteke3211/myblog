@@ -83,7 +83,7 @@ def userlogin(request):
         user = authenticate(username=uname, password=pass1)
         if user is not None:
             login(request, user)
-            messages.success(request,f'Welcome {str(request.user).capitalize()}')
+            # messages.success(request,f'Welcome {str(request.user).capitalize()}')
             return redirect('bhome')
 
         else:
