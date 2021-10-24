@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}BlogHome{% endblock title %}
+{% load static %}
+
+{% block body %} 
+
+<div class="container my-5">
+    <div class="row mb-2">
+        {% for blog in blogs %}
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col-md-7 col-sm-7 col-xs-7 p-4 d-flex flex-column position-static ">
+                <strong class="d-inline-block mb-2 text-primary">{{blog.category}}</strong>
+                <h3 class="mb-0">{{blog.title}}</h3>
+                <div class="mb-1 text-muted">{{blog.pub_date}}</div>
+                <p class="card-text mb-auto"><div class="preview">{{blog.description|safe|truncatewords:20}}</div></p>
+                <a href="{% url 'blogpost' blog.post_id %}" class="stretched-link">Continue reading...</a>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5 d-none d-lg-block img_container">
+                    <img src="{{blog.thumbnail.url}}" alt="" class='bd-placeholder-img blog_thumbnail'>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+
+  let previews = document.getElementsByClassName('preview')
+    Array.from(previews).forEach((element)=>{
+        element.innerHTML = element.innerText;
+    })
+
+</script>
+
+{% endblock body %}
+

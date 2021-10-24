@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Blog_Dashboard{% endblock title %}
+{% load static %}
+
+{% block navbar %} {% include 'navbar_blog.html' %} {% endblock navbar %}
+
+{% block body %}
+
+<div class='container' style="height: 60vh; margin-top: 21vh;">
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
+        <h1>Dashboard Page</h1>
+        <h2>Welcome {{request.user}}</h2><br>
+        <a href="{% url 'changepass' %}" class='btn btn-warning'>Change Password</a>
+        <a href="{% url 'logout' %}" class='btn btn-warning'>Logout</a>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+</div>
+
+{% endblock body %}
+

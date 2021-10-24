@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}BlogHome{% endblock title %}
+{% load static %}
+
+{% block css %}{{block.super}} <link rel="stylesheet" href="{% static 'project/css/style.css' %}"> {% endblock css %}
+{% block navbar %} {% include 'navbar_blog.html' %} {% endblock navbar %}
+{% block body %} 
+
+
+<div class="container my-5">
+    
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-xm-8 col-sm-8 col-md-8 ">
+            <h2>Search Result:</h2>
+            {% if blogs %}
+            <span>{{blogs|length}} results found for <em>{{query}}</em></span>
+            {% for blog in blogs %}
+            
+                 <hr>
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-md-7 col-sm-7 col-xs-7 p-4 d-flex flex-column position-static ">
+                    <strong class="d-inline-block mb-2 text-primary">{{blog.category}}</strong>
+                    <h3 class="mb-0">{{blog.title}}</h3>
+                    <div class="mb-1 text-muted">{{blog.pub_date}}</div>
+                    <p class="card-text mb-auto"><div class="preview">{{blog.description|safe|truncatewords:12}}</div></p>
+                    <a href="{% url 'blogpost' blog.post_id %}" class="stretched-link">Continue reading...</a>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 d-none d-lg-block">
+                        <img src="{{blog.thumbnail.url}}" alt="" class='bd-placeholder-img blog_thumbnail'>
+                    </div>
+                </div>
+      
+            
+            {% endfor %}
+            <hr>
+
+            {% elif  query|length > 20 %}
+                
+                <div class="alert alert-info">
+                
+                    <strong>No Search Results</strong><br><br>
+                    {{query|truncatechars:32}} (and any subsequent words) was ignored because we limit queries to 32 words <br><br>
+                    Your Search - <b><em>{{query|truncatechars:132}}</em></b> <br>
+                    - did not match any post
+                    <br>
+                    <br>
+                    Suggestion:
+                    <br> Try different keyword
+                    <br> Try more general keyword
+                    <br> Try fewer keyword
+                </div>
+
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>No Search Results</strong><br><br>
+                    Your Search - <b><em> {{query|truncatechars:132}} </em></b> <br>
+                    - did not match any post
+                    <br>
+                    <br>
+                    Suggestion:
+                    <br> Try different keyword
+                    <br> Try more general keyword
+                
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
